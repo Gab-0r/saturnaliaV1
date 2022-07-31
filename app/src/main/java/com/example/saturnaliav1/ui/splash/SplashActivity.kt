@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
         splashBinding = ActivitySplashBinding.inflate(layoutInflater)
         val view = splashBinding.root
         setContentView(view)
-        //Temporaizador para retornar al ui.main Activity
+        //Temporizador para retornar al ui.main Activity
         val timer = Timer()
         timer.schedule(
             timerTask{
@@ -28,5 +28,6 @@ class SplashActivity : AppCompatActivity() {
     private fun goToMainActivity(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
