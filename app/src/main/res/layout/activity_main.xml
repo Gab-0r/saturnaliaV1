@@ -7,8 +7,8 @@
     tools:context=".ui.main.MainActivity" >
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.saturnaliav1.ui.fragments.login.LoginFragment"
+        android:id="@+id/fragmentRegister"
+        android:name="com.example.saturnaliav1.ui.fragments.register.registerFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
