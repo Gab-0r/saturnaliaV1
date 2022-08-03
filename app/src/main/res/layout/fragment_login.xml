@@ -101,6 +101,7 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:textColor="@color/pinkText"
+            android:textColorHint="@color/pink"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
