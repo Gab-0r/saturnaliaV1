@@ -23,11 +23,20 @@ class RegisterViewModel : ViewModel() {
 
     private var position = 0
     private var emptyFieldAt: MutableLiveData<Int> = MutableLiveData()
-    val emptyFieldAtDone: LiveData<Int> = emptyFieldAt
+    var emptyFieldAtDone: LiveData<Int> = emptyFieldAt
 
-    fun areEmptyFields(name_field: Boolean, lastname_field: Boolean,
-                       email_field: Boolean,  pass_field: Boolean, confpass_field: Boolean){
-        var fields = booleanArrayOf(name_field, lastname_field, email_field, pass_field, confpass_field)
+    private var areFieldsOk = false
+
+    private var passOk_ = false
+    private var arePassOk: MutableLiveData<Boolean> = MutableLiveData()
+    var arePassOkDone: LiveData<Boolean> = arePassOk
+
+    private var regsuccess_ = false
+    var regSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    var regSuccessDone: LiveData<Boolean> = regSuccess
+
+    fun areEmptyFields(name_field: Boolean, email_field: Boolean,  pass_field: Boolean, confpass_field: Boolean){
+        var fields = booleanArrayOf(name_field, email_field, pass_field, confpass_field)
         for (i in fields.indices) {
             Log.d("Verificando campo: ", i.toString() + fields.get(i).toString() )
             if (fields.get(i)) {
@@ -37,11 +46,28 @@ class RegisterViewModel : ViewModel() {
                 break
             }
         }
+        areFieldsOk = true
     }
 
     fun storeFields(discoName_: String, discoEmail_: String, discoPass_: String){
-        discoName.value = discoName_
-        discoEmail.value = discoEmail_
-        discoPass.value = discoPass_
+        if(regsuccess_) {
+            discoName.value = discoName_
+            discoEmail.value = discoEmail_
+            discoPass.value = discoPass_
+            regSuccess.value = true //Avisar a la vista que se completó el registro(Logica inversa)
+        }
+    }
+
+    fun passComp(pass_: String, confPass_: String){
+        if(pass_ != confPass_){
+            passOk_ = false
+            arePassOk.value = false
+        }
+    }
+
+    fun isRegOk(){
+        if(areFieldsOk && passOk_){
+            regsuccess_ = true
+        }
     }
 }
