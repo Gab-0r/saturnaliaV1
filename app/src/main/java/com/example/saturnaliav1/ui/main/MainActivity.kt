@@ -20,17 +20,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val navView: BottomNavigationView = binding.navView
+/*
+        val navView: BottomNavigationView = binding.bottomNavigationView
         val navController = findNavController(R.id.frame_layout)
-
-        navController.addOnDestinationChangedListener { _, destination, ->
+        navController.addOnDestinationChangedListener{_,destination,_->
             if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment)
-                bottomNavigationView.visibility = View.GONE
+                navView.visibility = View.GONE
             else
-                bottomNavigationView.visibility = View.VISIBLE
+                navView.visibility = View.VISIBLE
         }
-        /*
+*/
         replaceFragment(ProfileFragment())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
-        }*/
+        }
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -53,7 +52,4 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.constrain_layout, fragment)
         fragmentTransaction.commit()
     }
-
-
-
 }

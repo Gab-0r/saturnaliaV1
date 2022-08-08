@@ -10,9 +10,6 @@ import com.example.saturnaliav1.R
 
 class InfoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = InfoFragment()
-    }
 
     private lateinit var viewModel: InfoViewModel
 

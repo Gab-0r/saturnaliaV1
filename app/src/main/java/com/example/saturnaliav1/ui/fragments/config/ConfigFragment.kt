@@ -10,10 +10,6 @@ import com.example.saturnaliav1.R
 
 class ConfigFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ConfigFragment()
-    }
-
     private lateinit var viewModel: ConfigViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
