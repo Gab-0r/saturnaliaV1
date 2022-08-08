@@ -9,4 +9,9 @@
     <string name="password">Contraseña</string>
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="register_button">Registrarse</string>
+    <string name="home_menu">home</string>
+    <string name="products_menu">Productos</string>
+    <string name="perfil_menu">Perfil</string>
+    <string name="info_menu">Información</string>
+    <string name="config_menu">Configuración</string>
 </resources>

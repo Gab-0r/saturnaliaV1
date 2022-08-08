@@ -1,38 +1,36 @@
 package com.example.saturnaliav1.ui.fragments.register
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.saturnaliav1.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.saturnaliav1.databinding.FragmentRegisterBinding
 
 class registerFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = registerFragment()
-        private lateinit var viewModel: RegisterViewModel
-        private lateinit var registerBinding: FragmentRegisterBinding
-    }
+
+
+    private lateinit var registerviewModel: RegisterViewModel
+    private lateinit var registerBinding: FragmentRegisterBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
         registerBinding = FragmentRegisterBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        val view = registerBinding.root
-        return view
+        registerviewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        return registerBinding.root
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity)!!.supportActionBar!!.hide()
+        (activity as AppCompatActivity).supportActionBar!!.hide()
 
-        viewModel.emptyFieldAtDone.observe(viewLifecycleOwner){
+        registerviewModel.emptyFieldAtDone.observe(viewLifecycleOwner){
             when(it){
                 1 -> Toast.makeText(getActivity(),"Digite su nombre", Toast.LENGTH_SHORT).show()
                 2 -> Toast.makeText(getActivity(), "Digite su e-mail", Toast.LENGTH_SHORT).show()
@@ -41,30 +39,31 @@ class registerFragment : Fragment() {
             }
         }
 
-        viewModel.arePassOkDone.observe(viewLifecycleOwner){
-            if(!it)Toast.makeText(getActivity(), "Las contraseñas son diferentes", Toast.LENGTH_SHORT).show()
+        registerviewModel.arePassOkDone.observe(viewLifecycleOwner){
+            if(!it)Toast.makeText(activity, "Las contraseñas son diferentes", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.regSuccess.observe(viewLifecycleOwner){
+        registerviewModel.regSuccess.observe(viewLifecycleOwner){
             if(it)Toast.makeText(getActivity(), "Registro satisfactorio", Toast.LENGTH_SHORT).show()
             else Toast.makeText(getActivity(), "Registro fallido", Toast.LENGTH_SHORT).show()
         }
 
         with(registerBinding){
             registerButton.setOnClickListener{
-                viewModel.areEmptyFields(
+                registerviewModel.areEmptyFields(
                     nameTextInputLayout.text.toString().isEmpty(),
                     emailTextEmailAddress2.text.toString().isEmpty(),
                     passwordTextTextPassword.text.toString().isEmpty(),
                     confirmPasswordTextPassword2.text.toString().isEmpty()
                 )
 
-                viewModel.passComp(passwordTextTextPassword.text.toString(), confirmPasswordTextPassword2.text.toString())
-                viewModel.isRegOk()
-                viewModel.storeFields(nameTextInputLayout.text.toString(), emailTextEmailAddress2.text.toString(), passwordTextTextPassword.text.toString())
+                registerviewModel.passComp(passwordTextTextPassword.text.toString(), confirmPasswordTextPassword2.text.toString())
+                registerviewModel.isRegOk()
+                registerviewModel.storeFields(nameTextInputLayout.text.toString(), emailTextEmailAddress2.text.toString(), passwordTextTextPassword.text.toString())
 
             }
         }
+
     }
 
 }
